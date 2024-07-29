@@ -38,8 +38,7 @@ const Header = () => {
 
                 <Link to="/" className="logo">
                     <h5>
-                        MERN BLOG
-
+                        <img src={`${process.env.PUBLIC_URL}/ajlogo.png`} width={130} alt='AJ BLOGS'/>
                     </h5>
                 </Link>
                 <SearchForm />
@@ -48,9 +47,7 @@ const Header = () => {
                     {auth ?
                         <div className="auth_options">
 
-
-                            <Link className='addStory-link' to="/addstory"><RiPencilFill /> Add Story </Link>
-
+                            <Link className='addStory-link ' to="/addstory"><RiPencilFill /> <span className='blog-text'>Add Blog</span> </Link>
 
                             <Link to="/readList" className='readList-link'>
                                 <BsBookmarks />
@@ -60,7 +57,6 @@ const Header = () => {
                             </Link>
                             <div className='header-profile-wrapper '>
 
-
                                 {loading ? <SkeletonElement type="minsize-avatar" />
 
                                     :
@@ -68,7 +64,6 @@ const Header = () => {
                                     <img src={`/userPhotos/${activeUser.photo}`} alt={activeUser.username} />
 
                                 }
-
 
                                 <div className="sub-profile-wrap  ">
                                     <Link className='profile-link' to="/profile"  > <FaUserEdit />  Profile </Link>
@@ -78,7 +73,6 @@ const Header = () => {
                                 </div>
 
                             </div>
-
 
                         </div>
 

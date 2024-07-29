@@ -1,8 +1,8 @@
 import { useEffect,useState,useContext } from 'react';
 import {Outlet, useNavigate} from 'react-router-dom'
-import Home from '../GeneralScreens/Home';
+import Home from '../components/GeneralScreens/Home';
 import axios from 'axios';
-import { AuthContext } from "../../Context/AuthContext";
+import { AuthContext } from "../Context/AuthContext";
 
 const PrivateRoute =( ) => {
     const bool =localStorage.getItem("authToken") ? true :false

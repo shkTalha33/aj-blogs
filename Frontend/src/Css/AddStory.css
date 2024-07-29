@@ -158,3 +158,9 @@
     font-weight: bold;
     padding-left: 1rem;
 }
+
+@media (max-width:499px) {
+    .StoryImageField .txt {
+        width: 250px !important;
+    }
+}

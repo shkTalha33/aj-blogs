@@ -51,7 +51,7 @@ const Profile = () => {
                 loading ? <Loader /> :
                     <div className="Inclusive_profile_page">
                         <Link to={'/'} >
-                            <FiArrowLeft />
+                            <FiArrowLeft size={25} />
                         </Link>
                         <div className="profile-top-wrap">
 
@@ -59,7 +59,6 @@ const Profile = () => {
                                 Membership Information
                             </span>
 
-                            <a href="#!">Close  Account</a>
                         </div>
                         <ul>
 

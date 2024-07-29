@@ -1,10 +1,9 @@
-
-const mongoose = require("mongoose")
-const Comment = require("./comment")
-const slugify = require("slugify")
+const mongoose = require("mongoose");
+const Comment = require("./comment");
+const User = require("./user");
+const slugify = require("slugify");
 
 const StorySchema = new mongoose.Schema({
-
     author: {
         type: mongoose.Schema.ObjectId,
         ref: "User",
@@ -15,12 +14,12 @@ const StorySchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a title"],
         unique: true,
-        minlength: [4, "Please provide a title least 4 characters "],
+        minlength: [4, "Please provide a title of at least 4 characters"],
     },
     content: {
         type: String,
-        required: [true, "Please a provide a content "],
-        minlength: [10, "Please provide a content least 10 characters "],
+        required: [true, "Please provide content"],
+        minlength: [10, "Please provide content of at least 10 characters"],
     },
     image: {
         type: String,
@@ -39,39 +38,35 @@ const StorySchema = new mongoose.Schema({
         default: 0
     },
     comments: [{
-            type: mongoose.Schema.ObjectId,
-            ref: "Comment"
+        type: mongoose.Schema.ObjectId,
+        ref: "Comment"
     }],
     commentCount: {
         type: Number,
         default: 0
     }
+}, { timestamps: true });
 
-
-}, { timestamps: true })
-
-StorySchema.pre("save",  function (next) {
-
+StorySchema.pre("save", function (next) {
     if (!this.isModified("title")) {
         next();
     }
-
-
-    this.slug = this.makeSlug()
-
-    next()
-
-})
+    this.slug = this.makeSlug();
+    next();
+});
 
 StorySchema.pre("remove", async function (next) {
+    // Remove comments associated with the story
+    await Comment.deleteMany({ story: this._id });
 
-    const story= await Story.findById(this._id)
+    // Remove story reference from users' readList
+    await User.updateMany(
+        { readList: this._id },
+        { $pull: { readList: this._id } }
+    );
 
-    await Comment.deleteMany({
-        story : story 
-    })
-
-})
+    next();
+});
 
 StorySchema.methods.makeSlug = function () {
     return slugify(this.title, {
@@ -81,10 +76,9 @@ StorySchema.methods.makeSlug = function () {
         strict: false,
         locale: 'tr',
         trim: true
-    })
+    });
+};
 
-}
-
-const Story = mongoose.model("Story", StorySchema)
+const Story = mongoose.model("Story", StorySchema);
 
 module.exports = Story;

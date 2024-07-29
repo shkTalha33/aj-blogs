@@ -104,7 +104,7 @@ const AddComment = ({ setSidebarShowStatus, slug, getStoryComments, activeUser, 
                             name="content"
                             onKeyUp={(e) => {
                                 setContent(e.target.innerHTML)
-                                console.log(e.target.innerHTML)
+                                // console.log(e.target.innerHTML)
                             }
                             }
 

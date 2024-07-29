@@ -7,7 +7,7 @@ import { FaRegHeart, FaHeart } from 'react-icons/fa'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { FiEdit, FiArrowLeft } from 'react-icons/fi'
 import { FaRegComment } from 'react-icons/fa'
-import { BsBookmarkPlus, BsThreeDots, BsBookmarkFill } from 'react-icons/bs'
+import { BsBookmarkPlus, BsBookmarkFill } from 'react-icons/bs'
 import CommentSidebar from '../CommentScreens/CommentSidebar';
 
 const DetailStory = () => {
@@ -165,7 +165,7 @@ const DetailStory = () => {
 
               <div className="top_detail_wrapper">
                 <Link to={'/'} >
-                  <FiArrowLeft />
+                  <FiArrowLeft size={25} />
                 </Link>
                 <h5>{story.title}</h5>
 
@@ -183,13 +183,6 @@ const DetailStory = () => {
                         editDate(story.createdAt)
                       }
                     </li>
-                    <b>-</b>
-
-                    <li className='story-readtime'>
-                      {story.readtime} min read
-
-                    </li>
-
                   </ul>
 
                   {
@@ -288,10 +281,6 @@ const DetailStory = () => {
                     </li>
 
                     <li className='BsThreeDots_opt'>
-                      <i  >
-                        <BsThreeDots />
-                      </i>
-
                       {activeUser &&
                         story.author._id === activeUser._id ?
                         <div className="delete_or_edit_story  ">

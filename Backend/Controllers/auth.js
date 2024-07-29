@@ -76,10 +76,80 @@ const forgotpassword  = asyncErrorWrapper( async (req,res,next) => {
     const resetPasswordUrl = `${URI}/resetpassword?resetPasswordToken=${resetPasswordToken}`
 
     const emailTemplate = `
-    <h3 style="color : red "> Reset Your Password </h3>
-    <p> This <a href=${resetPasswordUrl}   
-     target='_blank'  >Link </a> will expire in 1 hours </p> 
-    `;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reset Your Password</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #007bff;
+            color: #ffffff;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .content a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AJ Blogs</h1>
+        </div>
+        <div class="content">
+            <h2>Password Reset Request</h2>
+            <p>Hi there,</p>
+            <p>We received a request to reset your password for your AJ Blogs account. Click the button below to reset your password:</p>
+            <a href="${resetPasswordUrl}">Reset Your Password</a>
+            <p>If you did not request a password reset, please ignore this email or contact support if you have questions.</p>
+            <p>Thanks,<br>The AJ Blogs Team</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2024 AJ Blogs. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
+`;
 
     try {
 
@@ -135,6 +205,7 @@ const resetpassword  =asyncErrorWrapper(  async (req,res,next) => {
         return next(new CustomError("Invalid token or Session Expired" ,400))
     }
 
+    console.log("works");
 
     user.password = newPassword ; 
 

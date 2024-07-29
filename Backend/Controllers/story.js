@@ -1,7 +1,8 @@
 const asyncErrorWrapper = require("express-async-handler")
 const Story = require("../Models/story");
 const deleteImageFile = require("../Helpers/Libraries/deleteImageFile");
-const {searchHelper, paginateHelper} =require("../Helpers/query/queryHelpers")
+const {searchHelper, paginateHelper} =require("../Helpers/query/queryHelpers");
+const User = require("../Models/user");
 
 const addStory = asyncErrorWrapper(async  (req,res,next)=> {
 
@@ -48,7 +49,7 @@ const getAllStories = asyncErrorWrapper( async (req,res,next) =>{
 
     query = paginationResult.query  ;
 
-    query = query.sort("-likeCount -commentCount -createdAt")
+    query = query.sort("-createdAt -likeCount -commentCount ")
 
     const stories = await query
     
@@ -166,23 +167,44 @@ const editStory  =asyncErrorWrapper(async(req,res,next)=>{
 
 })
 
-const deleteStory  =asyncErrorWrapper(async(req,res,next)=>{
+const deleteStory = asyncErrorWrapper(async (req, res, next) => {
+    const { slug } = req.params;
 
-    const {slug} = req.params  ;
+    const story = await Story.findOne({ slug: slug });
 
-    const story = await Story.findOne({slug : slug })
+    if (!story) {
+        return res.status(404).json({
+            success: false,
+            message: "Story not found"
+        });
+    }
 
-    deleteImageFile(req,story.image) ; 
+    const author = await User.findById(story.author);
 
-    await story.remove()
+    if (!author) {
+        return res.status(404).json({
+            success: false,
+            message: "Author not found"
+        });
+    }
 
-    return res.status(200).
-        json({
-            success:true,
-            message : "Story delete succesfully "
-    })
+    const isStoryInReadList = author.readList.includes(story._id);
 
-})
+    if (isStoryInReadList) {
+        author.readListLength -= 1;
+        await author.save();
+    }
+
+    deleteImageFile(req, story.image);
+
+    await story.remove();
+
+    return res.status(200).json({
+        success: true,
+        message: "Story deleted successfully"
+    });
+});
+
 
 
 module.exports ={

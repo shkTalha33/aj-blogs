@@ -86,9 +86,9 @@ const EditProfile = () => {
 
                             <div className="profile-ımg-upld-wrapper">
 
-                                <div class="ProfilePhotoField">
+                                <div className="ProfilePhotoField">
                                     <FaUserAlt />
-                                    <div class="txt">
+                                    <div className="txt">
 
                                         {photo === previousPhoto ?
                                             <div>
@@ -115,8 +115,8 @@ const EditProfile = () => {
                                 </div>
 
 
-                                <div class="currentImage">
-                                    <div class="absolute">
+                                <div className="currentImage">
+                                    <div className="absolute">
                                         Currently Image
                                     </div>
                                     <img src={`http://localhost:5000/userPhotos/${previousPhoto}`} alt="userPhoto" />
@@ -125,7 +125,7 @@ const EditProfile = () => {
                             </div>
 
                             <button type='submit' className='editprofile-btn'
-                            >Edit Profile </button>
+                            >Save Changes </button>
 
 
 

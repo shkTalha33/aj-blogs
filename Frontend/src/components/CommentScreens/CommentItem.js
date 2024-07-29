@@ -81,9 +81,9 @@ const CommentItem = ({ comment, activeUser }) => {
                     </div>
                 </section>
 
-                <section>
+                {/* <section>
                     <BsThreeDots />
-                </section>
+                </section> */}
             </div>
 
 

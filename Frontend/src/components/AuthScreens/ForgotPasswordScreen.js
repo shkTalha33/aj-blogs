@@ -16,7 +16,6 @@ const ForgotPasswordScreen = () => {
         "/auth/forgotpassword",
         { email }
       );
-
       setSuccess(data.message);
     } catch (error) {
       setError(error.response.data.error);

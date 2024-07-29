@@ -58,9 +58,11 @@ const AddStory = () => {
     return (
 
         <div className="Inclusive-addStory-page ">
-            <Link to={'/'} >
-                <FiArrowLeft />
+           <span>
+           <Link to={'/'} >
+                <FiArrowLeft size={25}/> 
             </Link>
+           </span>
             <form onSubmit={handleSubmit} className="addStory-form">
 
                 {error && <div className="error_msg">{error}</div>}
@@ -88,9 +90,9 @@ const AddStory = () => {
                     }}
                     ref={editorEl}
                 />
-                <div class="StoryImageField">
+                <div className="StoryImageField">
                     <AiOutlineUpload />
-                    <div class="txt">
+                    <div className="txt">
                         {image ? image.name :
                             " Include a high-quality image in your story to make it more inviting to readers."
                         }

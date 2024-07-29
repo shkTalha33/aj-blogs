@@ -49,7 +49,7 @@ const ReadListPage = () => {
 
                 <div className="Inclusive-readList-page">
                     <Link to={'/'} >
-                        <FiArrowLeft />
+                        <FiArrowLeft size={25} />
                     </Link>
                     <h2>Reading List </h2>
 
@@ -79,9 +79,9 @@ const ReadListPage = () => {
 
                         </div>
 
-                        <i className='BsThreeDots-icon'>
+                        {/* <i className='BsThreeDots-icon'>
                             < BsThreeDots />
-                        </i>
+                        </i> */}
 
                     </div>
 
