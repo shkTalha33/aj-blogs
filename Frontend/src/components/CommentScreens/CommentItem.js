@@ -4,7 +4,6 @@ import {
     MdOutlineWavingHand,
     MdWavingHand
 } from 'react-icons/md'
-import { BsThreeDots } from 'react-icons/bs'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
